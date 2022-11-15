@@ -3,7 +3,7 @@ prevBtn
 nextBtn  
 RandomBtn  
 
-## 사용 메서드
+## 메서드
 ✔️ DOMContentLoaded   
 - 브라우저가 HTML을 전부 읽고 DOM 트리를 완성하는 즉시 발생한다.  
 - <img>나 스타일시트 등의 기타 자원은 기다리지 않는다.

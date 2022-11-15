@@ -4,7 +4,7 @@
 음수 : 빨간색  
 0 : 남색
 
-# 사용 메서드
+
 ✔️ document.querySelectorAll()  
 ✔️ forEach()  
 ✔️ addEventListener()  
