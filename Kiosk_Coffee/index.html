@@ -14,7 +14,6 @@
             *{
                 margin:0;
                 padding:0;
-                background-color: bg-light;
             }
             .orderList{
                 margin-top: 15%;
@@ -38,31 +37,15 @@
                 width: 300px;
                 height: 350px;
             }
-            /* .header{
-                width : 100vw;
-                position: fixed;
-                z-index: 1000;
-            } */
-            /* .container-fluid{
-                padding-top: 10vh;
-                display: flex;
-            } */
-        
-            /* .card {
-                position:fixed; _position:absolute; _z-index:-1;
-                width:20vw;
-                height: 70vh;
-                right:10vw;
-                top:10vh;
-                background-color: transparent;
-                padding:0;
-                margin-top : 5vh;
-                max-height: 70vh;
-                overflow: auto;
-            } */
-        
-            ::-webkit-scrollbar {
-                display: none;
+            .card-body {
+                min-width: 300px;
+            }
+            .card-body2 {
+                padding: 10px;
+            }
+            .menu {
+                font-size:3px;
+                vertical-align: text-top;
             }
         </style>
 
@@ -108,12 +91,29 @@
 
     <div class="offcanvas offcanvas-end orderList" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-        <h3 class="offcanvas-title" id="offcanvasRightLabel">ORDER LIST</h3>
+        <p class="h3 offcanvas-title" id="offcanvasRightLabel" >ORDER LIST</p>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
     
-        <div class="offcanvas-body">
-
+        <div class="offcanvas-body pt-0">
+            <div class="card" style="width:100%; height:350px; overflow-y: auto;">
+                <ul class="list-group list-group-flush cartUl">
+                </ul>
+            </div>
+            <div class="card mt-2">
+                <ul class="list-group list-group-flush">
+                    <div class="card-title">
+                        <h5>total</h5>
+                        <span class="total_price">2000원</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            
+                            <button class="btn btn-primary" type="button" >결제</button>
+                        </div>
+                    </div>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -138,16 +138,7 @@
             </div>
         </div>
     </div>    
-        <!-- 결제 창
-        <div class="card col-sm-1 col-md-4">
-            <h1 class="card-title" style="text-align: center">ORDER LIST</h1>
-            <div class ="orderlist card-body">
-    
-            </div>
-            <div>
-                <a class="btn btn-primary" role="button" style="float:right; margin: 10px">ORDER</a>
-            </div>
-        </div> -->
+
     </div>
     <script src="menu.js"></script>
     <script src="index.js"></script> 
