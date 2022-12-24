@@ -11,8 +11,8 @@
 - 지저분한 UI
 
 ### 결과
-<p align="center"><img src="https://user-images.githubusercontent.com/89373222/209360179-cb268b8b-acf2-4752-b12c-71e124d73f21.png" style="width:500px">
-<img src="https://user-images.githubusercontent.com/89373222/209360324-f86828b1-582e-4f55-bf4f-544b9a1869f9.png"style="width:500px">
+<p align="center"><img src="https://user-images.githubusercontent.com/89373222/209360179-cb268b8b-acf2-4752-b12c-71e124d73f21.png" style="width:500px"><br>
+<img src="https://user-images.githubusercontent.com/89373222/209360324-f86828b1-582e-4f55-bf4f-544b9a1869f9.png"style="width:500px"><br>
 <img src="https://user-images.githubusercontent.com/89373222/209360896-d75f1da6-9f8f-457e-9496-efd7903efd93.png" style="width:200px;height:300px"></p>
 
 ### 느낀점
@@ -29,4 +29,5 @@
 안주하지 않고 더 열심히해야겠다!!
 
 ### 버그 수정 필요
-- 카트에서 수량 변경 후 메인으로 가면 변경 된 수량 미 반영됨 - 2023.2. 이후 수정 예정.
+- 카트에서 수량 변경 후 메인으로 가면 변경 된 수량 미반영됨 - 2022.12.24 data-bs-backdrop="static"으로 해결
+- 카트에서 수량 변경 후 메인에서 메뉴 추가하면 수정된 수량이 미반영됨

@@ -20,7 +20,7 @@ menuList.forEach(function(item) {
                                     <span id="name">${item.name}</span><br>
                                     <span id="price">${createCommaFormat(item.price)}</span>
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control ${item.no} ${item.id}" value="1" style="text-align: center;" disabled >
+                                        <input type="number" min="1" class="form-control ${item.no} ${item.id}" value="1" style="text-align: center;" disabled >
                                         <button class="btn btn-outline-primary btn-number" type="button" button-type="plus"><i class="fas fa-plus"></i></button>
                                         <button class="btn btn-outline-danger btn-number" type="button" button-type="minus"><i class="fas fa-minus"></i></button>
                                         <button type="button" class="btn btn-outline-primary btn-add">담기</button>
@@ -43,7 +43,7 @@ btn.forEach(function(item) {
         } else {
             if(qty.value != 0) {
                 qty.value = Number(qty.value) - 1;
-            }            
+            }
         }
     })
 });
@@ -61,13 +61,16 @@ addCartBtn.forEach(function(item) {
         let menuId = qty.getAttribute('class').split(' ')[2];
         let qtyValue = qty.value;
 
+        
         menuList.forEach(function(item) {
             if(item.no == menuNo && item.id == menuId) {
                 item.count = item.count==null ? Number(qtyValue) : item.count+Number(qtyValue);
+                //console.log(cartArr)
                 cartArr.push(item);
-                makeCartList();
             }
         });
+
+        makeCartList();
         qty.value = 1;
         document.querySelector('.menuBtn').click();
     })  
@@ -78,6 +81,8 @@ addCartBtn.forEach(function(item) {
 function makeCartList() {
     let cartSet = new Set(cartArr);
     uniqueArr = [...cartSet];
+    //console.log('유니크Arr', uniqueArr)
+
     let cartUl = document.querySelector('.cartUl');
     let totalPrice = 0;
         
@@ -120,7 +125,6 @@ function makeCartList() {
                 totalP -= price  * qty.value;
                 qty.value = Number(qty.value) + 1;
                 document.querySelector('.total_price').innerText = createCommaFormat(totalP + (qty.value * price));
-
             } else if(btnType === 'minus') {
                     totalP -= price  * qty.value;
                     let value = Number(qty.value) - 1;
@@ -179,3 +183,5 @@ document.querySelector('.finishBtn').addEventListener('click', function() {
     alert('주문해주셔서 감사합니다');
     window.location.reload();
 });
+
+
