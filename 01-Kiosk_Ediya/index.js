@@ -1,4 +1,5 @@
 let menuList = [...menu];
+let cartUl = document.querySelector('.cartUl');
 
 let body
 // 메뉴 화면에 뿌리기
@@ -76,42 +77,8 @@ addCartBtn.forEach(function(item) {
     })  
 })
 
-
-// 카트 메뉴 리스트 만드는 함수
-function makeCartList() {
-    let cartSet = new Set(cartArr);
-    uniqueArr = [...cartSet];
-    //console.log('유니크Arr', uniqueArr)
-
-    let cartUl = document.querySelector('.cartUl');
-    let totalPrice = 0;
-        
-    while(cartUl.firstChild)  {
-        cartUl.removeChild(cartUl.firstChild);
-    }
-
-    uniqueArr.forEach(function(item) {
-        cartUl.innerHTML += `<li class="list-group-item cartLi ${item.no}">
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <span>${item.name}</span><br>
-                                        <span>${createCommaFormat(item.price)}</span>
-                                    </div>
-                                    <div class="col-sm-7 mt-3">
-                                        <div class="input-group">
-                                            <input type="number" min="0" class="form-control cartQty" value="${item.count}" price="${item.price}" item="${item.no}" style="height:25px;text-align:center;" disabled >
-                                            <button class="btn btn-outline-primary cart-btn-number" type="button" button-type="plus" style="height:25px;text-align: center;"><i class="fas fa-plus menu"></i></button>
-                                            <button class="btn btn-outline-danger cart-btn-number" type="button" button-type="minus" style="height:25px;text-align: center;"><i class="fas fa-minus menu"></i></button>
-                                            <button class="btn btn-outline-success cart-btn-number" type="button" button-type="delete" style="height:25px;text-align: center;"><i class="fa fa-trash menu"></i></button>
-                                        </div>                    
-                                    </div>
-                            </li>`
-        totalPrice += item.price * item.count;
-
-        document.querySelector('.total_price').innerText = createCommaFormat(totalPrice);
-    })
-
-    // 카트 +/- 버튼 기능
+// 카트 +/- 삭제 버튼 기능
+function makeCartFnBtn() {
     cartBtn = document.querySelectorAll('.cart-btn-number');
     cartBtn.forEach(function(cartItem) {
         cartItem.addEventListener('click', function() {
@@ -171,6 +138,41 @@ function makeCartList() {
     });
 }
 
+
+// 카트 메뉴 리스트 만드는 함수
+function makeCartList() {
+    let cartSet = new Set(cartArr);
+    uniqueArr = [...cartSet];
+    //console.log('유니크Arr', uniqueArr)
+
+    let totalPrice = 0;
+        
+    while(cartUl.firstChild)  {
+        cartUl.removeChild(cartUl.firstChild);
+    }
+
+    uniqueArr.forEach(function(item) {
+        cartUl.innerHTML += `<li class="list-group-item cartLi ${item.no} ${item.id}">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <span>${item.name}</span><br>
+                                        <span>${createCommaFormat(item.price)}</span>
+                                    </div>
+                                    <div class="col-sm-7 mt-3">
+                                        <div class="input-group">
+                                            <input type="number" min="0" class="form-control cartQty" value="${item.count}" price="${item.price}" item="${item.no}" style="height:25px;text-align:center;" disabled >
+                                            <button class="btn btn-outline-primary cart-btn-number" type="button" button-type="plus" style="height:25px;text-align: center;"><i class="fas fa-plus menu"></i></button>
+                                            <button class="btn btn-outline-danger cart-btn-number" type="button" button-type="minus" style="height:25px;text-align: center;"><i class="fas fa-minus menu"></i></button>
+                                            <button class="btn btn-outline-success cart-btn-number" type="button" button-type="delete" style="height:25px;text-align: center;"><i class="fa fa-trash menu"></i></button>
+                                        </div>                    
+                                    </div>
+                            </li>`
+        totalPrice += item.price * item.count;
+        makeCartFnBtn();
+        document.querySelector('.total_price').innerText = createCommaFormat(totalPrice);
+    })
+}
+
 function createCommaFormat(num) {
     return Number(num).toLocaleString();
 }
@@ -184,4 +186,20 @@ document.querySelector('.finishBtn').addEventListener('click', function() {
     window.location.reload();
 });
 
-
+//캔버스 닫힐때 이벤트
+let canvas = document.querySelector('.orderList');
+canvas.addEventListener('hidden.bs.offcanvas', function() {
+    let childNode = cartUl.querySelectorAll('.cartLi'); //자식
+    cartArr = [];
+    childNode.forEach(function(item) {
+        let no = item.getAttribute('class').split(' ')[2];
+        let id = item.getAttribute('class').split(' ')[3];
+        let qty = Number(item.querySelector('.cartQty').value);
+        menuList.forEach(function(menu) {
+            if(menu.id == id && menu.no == no) {
+                menu.count = qty;
+                cartArr.push(menu);
+            }
+        })
+    })
+})
